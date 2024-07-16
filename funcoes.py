@@ -18,8 +18,11 @@ def listar_armazem(page, voltar_func):
     scrollable_table = ft.Column([data_table], scroll=ft.ScrollMode.ALWAYS, height=300)
     # Cria o botão "Voltar"
     botao_voltar = ft.Container(content=ft.ElevatedButton(text="Voltar", on_click=voltar_func), alignment=ft.alignment.bottom_right, margin=10)
+    #Texto que aparece o valor total em estoque
+    texto_total = ft.Container(
+    content=ft.ElevatedButton(f"Total: {tabela_armazem['valor'].sum()}"))
     # Adiciona a tabela rolável e o botão "Voltar" na página
-    page.add(scrollable_table, botao_voltar)
+    page.add(scrollable_table, botao_voltar, texto_total)
     
 #funcao que lista a tabela kit
 def listar_kits(page, voltar_func):
@@ -37,7 +40,7 @@ def listar_kits(page, voltar_func):
     # Adiciona rolagem à tabela usando um contêiner Column
     scrollable_table = ft.Column([data_table], scroll=ft.ScrollMode.ALWAYS, height=300)
     # Cria o botão "Voltar"
-    botao_voltar = ft.Container(content=ft.ElevatedButton(text="Voltar", on_click=voltar_func), alignment=ft.alignment.bottom_right, margin=10)
+    botao_voltar = ft.Container(content=ft.ElevatedButton(text="Voltar", on_click=voltar_func), alignment=ft.alignment.bottom_right, margin=10 )
     # Adiciona a tabela rolável e o botão "Voltar" na página
     page.add(scrollable_table, botao_voltar)
     
