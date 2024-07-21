@@ -61,7 +61,6 @@ def main(page: ft.Page):
 
         #parte responsavel por criar os itens que apareceram na tela
         titulo = ft.Container(content=ft.Text("CADASTRO DE PRODUTOS", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY), alignment=ft.alignment.center, margin=10)
-        botao_voltar = ft.Container(content=ft.ElevatedButton(text="Voltar", on_click=voltar), alignment=ft.alignment.bottom_right, margin=10)
         botao_cadastro = ft.ElevatedButton(text="Cadastrar", on_click=enviar)
         #form estara salvando os TextField criados um pouco acima
         form = ft.Column([codigo, nome, quantidade, valor], alignment=ft.MainAxisAlignment.CENTER)
@@ -78,7 +77,7 @@ def main(page: ft.Page):
         codigo = ft.TextField(label="Código do Kit", width=300)  
         kit = ft.TextField(label="Nome do Kit", width=300)  
         produto = ft.TextField(label="Nomes dos produtos que estarão no kit", width=300)  
-        valor = ft.TextField(label="Valor Unitário", width=300)  
+        valor = ft.TextField(label="Valor da cesta", width=300)  
 
         #funcao aonde inviaremos as informações escritas a uma outra funcao
         def enviar(evento):
@@ -91,7 +90,6 @@ def main(page: ft.Page):
                 page.remove(men_tela)
 
         #parte responsavel por criar os itens que apareceram na tela
-        botao_voltar = ft.Container(content=ft.ElevatedButton(text="Voltar", on_click=voltar), alignment=ft.alignment.bottom_right, margin=10)
         titulo = ft.Container(content=ft.Text("CADASTRO DE KITS", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY), alignment=ft.alignment.center, margin=10)
         botao_cadastro = ft.ElevatedButton(text="Cadastrar", on_click=enviar)
         #form estara salvando os TextField criados um pouco acima
@@ -108,7 +106,7 @@ def main(page: ft.Page):
         #cria TextField"caixas de texto flutuantes", para escrevermos nelas 
         nome = ft.TextField(label="Digite o nome do produto", width=300) 
         quantidade = ft.TextField(label="Quantidade vendida", width=300)  
-        valor = ft.TextField(label="Digite o valor total da venda", width=300) 
+        valor = ft.TextField(label="Digite o valor unitario do produto", width=300) 
         nome_cliente = ft.TextField(label="Digite o nome do cliente", width=300)  
 
         #funcao aonde inviaremos as informações escritas a uma outra funcao
@@ -122,7 +120,6 @@ def main(page: ft.Page):
                 page.remove(men_tela)
                 
         #parte responsavel por criar os itens que apareceram na tela
-        botao_voltar = ft.Container(content=ft.ElevatedButton(text="Voltar", on_click=voltar), alignment=ft.alignment.bottom_right, margin=10)
         titulo = ft.Container(content=ft.Text("CADASTRO DE VENDAS", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY), alignment=ft.alignment.center, margin=10)
         botao_cadastro = ft.ElevatedButton(text="Cadastrar", on_click=enviar)
         #form estara salvando os TextField criados um pouco acima 
@@ -149,11 +146,8 @@ def main(page: ft.Page):
                 time.sleep(0.5)
                 page.remove(men_tela)
 
-            
-           
         #parte responsavel por criar os itens que apareceram na tela
         titulo = ft.Container(content=ft.Text("RETIRAR PRODUTO", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY), alignment=ft.alignment.center, margin=10)
-        botao_voltar = ft.Container(content=ft.ElevatedButton(text="Voltar", on_click=voltar), alignment=ft.alignment.bottom_right, margin=10)
         botao_retirar = ft.ElevatedButton(text="Retirar", on_click=enviar)
         #aqui adicionamos os itens na tela 
         page.add(titulo, botao_voltar, codigo, botao_retirar)
@@ -177,10 +171,8 @@ def main(page: ft.Page):
                 time.sleep(0.5)
                 page.remove(men_tela)
 
-
         #parte responsavel por criar os itens que apareceram na tela
         titulo = ft.Container(content=ft.Text("LISTAR TABELAS", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY), alignment=ft.alignment.center, margin=10)
-        botao_voltar = ft.Container(content=ft.ElevatedButton(text="Voltar", on_click=voltar), alignment=ft.alignment.bottom_right, margin=10)
         botao_procurar = ft.ElevatedButton(text="Procurar", on_click=enviar)
         #aqui adicionamos os itens na tela 
         page.add(titulo, botao_voltar, codigo, botao_procurar)
@@ -198,7 +190,6 @@ def main(page: ft.Page):
         tabela_1 = ft.Container(content=ft.ElevatedButton(text="Listar Armazem",  on_click=lambda e: funcoes.listar_armazem(page, voltar)), margin=10, alignment=ft.alignment.center,)
         tabela_2 = ft.Container(content=ft.ElevatedButton(text="Listar kits",  on_click=lambda e: funcoes.listar_kits(page, voltar)), margin=10, alignment=ft.alignment.center,)
         tabela_3 = ft.Container(content=ft.ElevatedButton(text="Listar Vendas",  on_click=lambda e: funcoes.listar_vendas(page, voltar)), margin=10, alignment=ft.alignment.center,)
-        botao_voltar = ft.Container(content=ft.ElevatedButton(text="Voltar", on_click=voltar), alignment=ft.alignment.bottom_right, margin=10)
 
         #adiciona os itens na tela
         page.add(titulo, tabela_1, tabela_2, tabela_3, botao_voltar)
@@ -208,6 +199,7 @@ def main(page: ft.Page):
         #fecha a pagina
         page.window_close()
 
+    botao_voltar = ft.Container(content=ft.ElevatedButton(text="Voltar", on_click=voltar), alignment=ft.alignment.bottom_right, margin=10)
     #criação do menu
     page.add(
         ft.Column(

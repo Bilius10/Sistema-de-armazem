@@ -1,10 +1,13 @@
 import pandas as pd
 import flet as ft
 
+tabela_armazem = pd.read_excel("armazem.xlsx")
+tabela_kit = pd.read_excel("kit.xlsx")
+tabela_vendas = pd.read_excel("Saida dos produtos.xlsx")
+
 #funcao que lista a tabela armazem
 def listar_armazem(page, voltar_func):
-    # Carrega a tabela do arquivo Excel
-    tabela_armazem = pd.read_excel("armazem.xlsx")
+    global tabela_armazem
     # Limpa a página
     page.clean()
     # Cria as colunas da tabela
@@ -20,14 +23,13 @@ def listar_armazem(page, voltar_func):
     botao_voltar = ft.Container(content=ft.ElevatedButton(text="Voltar", on_click=voltar_func), alignment=ft.alignment.bottom_right, margin=10)
     #Texto que aparece o valor total em estoque
     texto_total = ft.Container(
-    content=ft.ElevatedButton(f"Total: {tabela_armazem['valor'].sum()}"))
+    content=ft.ElevatedButton(f"Total: R${round(tabela_armazem['valor'].sum(), 2)}"))
     # Adiciona a tabela rolável e o botão "Voltar" na página
     page.add(scrollable_table, botao_voltar, texto_total)
     
 #funcao que lista a tabela kit
 def listar_kits(page, voltar_func):
-    # Carrega a tabela do arquivo Excel
-    tabela_kit = pd.read_excel("kit.xlsx")
+    global tabela_armazem
     # Limpa a página
     page.clean()
     # Cria as colunas da tabela
@@ -46,8 +48,7 @@ def listar_kits(page, voltar_func):
     
 #funcao que lista a tabela vendas
 def listar_vendas(page, voltar_func):
-    # Carrega a tabela do arquivo Excel
-    tabela_vendas = pd.read_excel("Saida dos produtos.xlsx")
+    global tabela_vendas
 
     # Limpa a página
     page.clean()
@@ -73,8 +74,7 @@ def listar_vendas(page, voltar_func):
     
 #funcao que cadastra o produto
 def cadastro_produto(codigo, nome, quantidade, valor):
-    # Carrega a tabela do arquivo Excel
-    tabela_armazem = pd.read_excel("armazem.xlsx")
+    global tabela_armazem
 
     #cria um df inserir e insere as informações recebidas
     inserir = pd.DataFrame({
@@ -107,8 +107,7 @@ def cadastro_produto(codigo, nome, quantidade, valor):
 
 #funcao que cadastra o kit
 def cadastro_kit(codigo, nome, produto, valor):
-    # Carrega a tabela do arquivo Excel
-    tabela_kit = pd.read_excel("kit.xlsx")
+    global tabela_kit
 
     # Criação do DataFrame com os dados do novo kit
     inserir = pd.DataFrame({
@@ -131,15 +130,13 @@ def cadastro_kit(codigo, nome, produto, valor):
 
 #Funcao que cadastra as vendas
 def cadastro_vendas(nome, quantidade, valor, nome_cliente):
-    #carrega as tabelas do excel
-    tabela_vendas = pd.read_excel("Saida dos produtos.xlsx")
-    tabela_armazem = pd.read_excel("armazem.xlsx")
+    global tabela_armazem, tabela_vendas
 
     from datetime import datetime
     #inserção das informaões dentro do df
     inserir = pd.DataFrame({"nome": [nome],
                             "quantidade": [quantidade],
-                            "valor": [valor],
+                            "valor": [valor*quantidade],
                             "nome_cliente": [nome_cliente],
                             "data": [datetime.now().strftime('%d/%m/%Y')]})   
     
@@ -167,8 +164,7 @@ def cadastro_vendas(nome, quantidade, valor, nome_cliente):
 
 #funcao que retira itens da tabela armazen
 def eliminar(codigo):
-    #carrega as tabelas do excel
-    tabela_armazem = pd.read_excel("armazem.xlsx")
+    global tabela_armazem
 
     #verifica se o codigo esta no df
     if codigo in tabela_armazem['codigo'].values:
@@ -192,8 +188,7 @@ def eliminar(codigo):
     
 #funcao que procura itens dentro da tabela armazen
 def procurar(codigo, page, voltar_func):
-    #carrega a tabela do excel
-    tabela_armazem = pd.read_excel("armazem.xlsx")
+    global tabela_armazem
 
     # Busca o item dentro da coluna codigo do df
     if codigo in tabela_armazem['codigo'].values:
